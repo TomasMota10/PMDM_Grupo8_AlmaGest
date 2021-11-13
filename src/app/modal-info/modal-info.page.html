@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      
+        <ion-item lines="full">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="user.firstname"></ion-input>
+        </ion-item>
+      
+        <ion-item lines="full">
+          <ion-label position="floating">Apellidos</ion-label>
+          <ion-input [(ngModel)]="user.secondname"></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Compañía</ion-label>
+          <ion-input [(ngModel)]="user.company_id" type="number" ></ion-input>
+        </ion-item>
+    
+        <ion-item lines="full">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+    
+        <ion-item lines="full">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [(ngModel)]="user.password" type="password" ></ion-input>
+        </ion-item>
+    
+        <ion-col>
+          <ion-button (click)="guardar(user)" color="danger" expand="block">Guardar</ion-button>
+        </ion-col>
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>
