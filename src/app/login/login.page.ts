@@ -5,6 +5,7 @@ import {  FormGroup,
           FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { RestService } from '../services/rest.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginPage implements OnInit {
   contraseña: string;
   data: any;
 
-  constructor(public fb: FormBuilder, public alertControler: AlertController,restService: RestService) { 
+  constructor(private route: Router, public fb: FormBuilder, public alertControler: AlertController,restService: RestService) { 
     this.formularioLogin = this.fb.group({
       'email': new FormControl("", Validators.required),
       'password': new FormControl("", Validators.required)
@@ -49,7 +50,12 @@ export class LoginPage implements OnInit {
     .then(data => {
       this.data = data;
       this.data = this.data.data;
-      console.log(this.data);
+      if(this.data.type=='a'){
+        this.route.navigate(['/administration'])
+      }else{
+        this.route.navigate(['/user'])
+      }
+
     })
 
   }

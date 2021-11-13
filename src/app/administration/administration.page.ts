@@ -4,6 +4,7 @@ import { ViewChild } from '@angular/core';
 import { IonList, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalInfoPage } from '../modal-info/modal-info.page';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-administration',
@@ -16,8 +17,8 @@ export class AdministrationPage implements OnInit {
 
   //Referencia 
   @ViewChild('lista',{static:true}) lista: IonList;
-
-  constructor(private restService : RestService, private route: Router, private modalCtrl: ModalController) {
+  
+  constructor(private restService : RestService, private route: Router, private modalCtrl: ModalController, private alertCtrl: AlertController) {
 
   }
 
@@ -40,11 +41,15 @@ export class AdministrationPage implements OnInit {
   activar(id: number) {
     this.restService.activarUsuario(id);
     this.lista.closeSlidingItems();
+    this.ngOnInit();
+    this.ngOnInit();
   }
 
   desactivar(id: number) {
     this.restService.desactivarUsuario(id);
     this.lista.closeSlidingItems();
+    this.ngOnInit();
+    this.ngOnInit();
   }
 
   async editar(user) {
@@ -56,15 +61,41 @@ export class AdministrationPage implements OnInit {
     });
     await modal.present();
     
-    const { data } = await modal.onDidDismiss();
-    console.log(data);
+    const{data} = await modal.onDidDismiss();
+
     this.restService.editarUsuario(data.id, data.firstname, data.secondname, data.email, data.password, data.company_id);
     this.lista.closeSlidingItems();
+    
   }
 
-  eliminar(id: number) {
-    this.restService.eliminarUsuario(id)
+  async eliminar(id: number) {
+    const alert = await this.alertCtrl.create({
+      header: 'Alert',
+      subHeader: 'Delete User',
+      message: '¿Estas seguro de eliminar al usuario?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',	
+          cssClass: 'secondary',
+          handler: () => {}
+       },
+       {
+         text: 'OK',
+         handler: () => {
+          this.restService.eliminarUsuario(id)
+          this.ngOnInit();
+          this.ngOnInit();
+         }
+      }
+
+      ]
+    });
+
+    await alert.present();
+
     this.lista.closeSlidingItems();
+    
   }
 
 }

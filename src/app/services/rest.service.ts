@@ -140,7 +140,7 @@ export class RestService {
   eliminarUsuario(id: number){
 
     return new Promise(resolve => {
-      this.http.post(this.apiUrl + 'user/deleted/'+id,
+      this.http.post(this.apiUrl + '/user/deleted/'+id,
       {
         user_id: id
       },

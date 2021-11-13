@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Administracion</ion-title>
     <ion-buttons slot="end">
@@ -14,7 +13,7 @@
 
   <ion-list #lista>
     <ion-item-sliding *ngFor="let usuario of usuarios">
-      <ion-item *ngIf="usuario.type=='u'">
+      <ion-item *ngIf="usuario.deleted==0 && usuario.type=='u'">
         <ion-label>
           <h3>{{ usuario.firstname }} {{ usuario.secondname }}</h3>
           <p>{{ usuario.email }}</p>
