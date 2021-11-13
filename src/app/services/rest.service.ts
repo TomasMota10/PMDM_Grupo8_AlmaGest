@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -157,4 +158,29 @@ export class RestService {
 
   }
 
+  obtenerNoticias(){
+    return new Promise(resolve =>{
+      this.http.get(this.apiUrl + '/companies'
+      )
+      .subscribe(data => {resolve(data)
+        console.log(data)
+      err =>{
+        console.log(err)
+      }})
+    })
+  }
+
+  obtenerUsuario(id: number){
+    return new Promise<any>(resolve => {
+      this.http.get(this.apiUrl + '/user/'+id,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+      })
+      .subscribe(data => {resolve(data)
+        console.log(data);
+      err => {
+        console.log(err)
+      }})
+    })
+  }
 }

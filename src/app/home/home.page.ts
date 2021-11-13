@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RestService } from '../services/rest.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class HomePage {
   }
   
   ngOninit(){
-
+    
   }
 
+  
 }
