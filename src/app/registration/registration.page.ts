@@ -4,8 +4,8 @@ import { RestService } from '../services/rest.service';
 import {  FormGroup, 
           FormControl, 
           Validators, 
-          FormBuilder, 
-          EmailValidator} from '@angular/forms';
+          FormBuilder } from '@angular/forms';
+          import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +17,7 @@ export class RegistrationPage implements OnInit {
   formularioRegistration: FormGroup;
   restService : RestService;
 
-  constructor(public fb: FormBuilder, public alertControler: AlertController, restService : RestService) {
+  constructor(private route: Router, public fb: FormBuilder, public alertControler: AlertController, restService : RestService) {
 
     this.formularioRegistration = this.fb.group({
       'nombre': new FormControl("", Validators.required),
@@ -62,4 +62,5 @@ export class RegistrationPage implements OnInit {
     console.log(usuario);
     this.restService.registrarUsuario
     (usuario.nombre, usuario.apellidos, usuario.company_id, usuario.email, usuario.password, usuario.confirmpassword);
+    this.route.navigate(['/home'])
 }}
