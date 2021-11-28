@@ -183,4 +183,90 @@ export class RestService {
       }})
     })
   }
+
+  obtenerFamilias(){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/families')
+      .subscribe(data => {
+        resolve(data);
+        console.log(data);
+      err =>{
+        console.log(err);
+        }
+      })
+    })
+  }
+
+  obtenerArticulos(){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/articles',
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+      })
+      .subscribe(data => {
+        resolve(data);
+        console.log(data);
+      err =>{
+        console.log(err);
+      }
+      })
+    })
+  }
+
+  obtenerProductosEmpresa(id: number){
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl + '/products/company',
+      {
+        company_id: id 
+      },
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+      })
+      .subscribe(data =>{
+        resolve(data)
+        console.log(data)
+      err =>{
+        console.log(err)
+      }
+      })
+    })
+  }
+
+  insertarProductos(articleid: number, companyid: number, myprice: number, myfamilyid: number){
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl +'/products',
+      {
+        article_id: articleid,
+        company_id: companyid,
+        price: myprice,
+        family_id: myfamilyid
+      },
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+      })
+      .subscribe(data =>{
+        resolve(data)
+        console.log(data)
+      err =>{
+        console.log(err)
+      }
+      })
+    })
+  }
+
+  eliminarProducto(id: number){
+    return new Promise(resolve => {
+      this.http.delete(this.apiUrl + '/products/'+id,
+      {
+        headers: new HttpHeaders().delete('Authorization', 'Bearer ' + this.token)
+      })
+      .subscribe(data =>{
+        resolve(data)
+        console.log(data)
+      err =>{
+        console.log(err)
+      }
+      })
+    })
+  }
 }
