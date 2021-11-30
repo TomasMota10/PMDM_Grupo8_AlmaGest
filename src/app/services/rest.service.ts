@@ -236,12 +236,12 @@ export class RestService {
     })
   }
 
-  insertarProductos(articleid: number, companyid: number, myprice: number, myfamilyid: number){
+  insertarProductos(articleid: number, myprice: number, myfamilyid: number){
     return new Promise(resolve => {
       this.http.post(this.apiUrl +'/products',
       {
         article_id: articleid,
-        company_id: companyid,
+        company_id: this.company_id,
         price: myprice,
         family_id: myfamilyid
       },
