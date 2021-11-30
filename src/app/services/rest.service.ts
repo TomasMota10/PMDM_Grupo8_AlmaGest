@@ -9,8 +9,10 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 export class RestService {
   token: any;
   company_id: number
-  
+  usuario: any;
+
   apiUrl = 'http://semillero.allsites.es/public/api';
+  
   constructor(private http: HttpClient) { }
 
   login(){
@@ -36,7 +38,7 @@ export class RestService {
         password: mypassword})     
         .subscribe(data => {
           this.token = data.data.token;
-          this.company_id = data.data.company_id; 
+          this.company_id = data.data.company_id;
           resolve(data);   
           console.log(data);   
           err=> {
@@ -55,7 +57,7 @@ export class RestService {
       .subscribe(data => {resolve(data)
         console.log(data);
       err => {
-        console.log(err)
+        console.log(err);
       }})
     })
   }
@@ -216,19 +218,19 @@ export class RestService {
   }
 
   obtenerProductosEmpresa(){
-    return new Promise<any>(resolve => {
+    return new Promise(resolve => {
       this.http.post(this.apiUrl + '/products/company',
       {
-        company_id: this.company_id
+        id: this.company_id
       },
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
       .subscribe(data =>{
         resolve(data)
-        console.log(data)
+        console.log(data);
       err =>{
-        console.log(err)
+        console.log(err);
       }
       })
     })

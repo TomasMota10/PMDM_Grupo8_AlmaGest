@@ -8,7 +8,7 @@ import { RestService } from '../services/rest.service';
 })
 export class UserPage implements OnInit {
 
-  productos: any;
+  productos: any[] =[];
   limite=50;
 
   // @ViewChild('lista',{static:true}) lista: IonList;
@@ -16,12 +16,9 @@ export class UserPage implements OnInit {
   constructor(private restService : RestService) { }
 
   ngOnInit() {
-  }
-
-  listaProduct(){
     this.restService.obtenerProductosEmpresa()
-    .then(producto => {
-      this.productos = producto.data;
+    .then(data => {
+      this.productos = data['data'];
     })
   }
 
