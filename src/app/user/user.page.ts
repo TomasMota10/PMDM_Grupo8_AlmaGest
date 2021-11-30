@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonList, ModalController } from '@ionic/angular';
 import { ModalInfo2Page } from '../modal-info2/modal-info2.page';
 import { RestService } from '../services/rest.service';
 
@@ -13,7 +13,7 @@ export class UserPage implements OnInit {
   productos: any[] =[];
   limite=50;
 
-  // @ViewChild('lista',{static:true}) lista: IonList;
+  @ViewChild('lista',{static:true}) lista: IonList;
   
   constructor(private restService : RestService, private modalCtrl : ModalController) { }
 
@@ -24,8 +24,10 @@ export class UserPage implements OnInit {
     })
   }
 
-  borrarProduct(id: number){
-
+  borrarProduct(i: number, id: number){
+    this.productos.splice(i, 1);
+    this.restService.eliminarProducto(id);
+    
   }
 
   async addProduct() {
@@ -35,8 +37,11 @@ export class UserPage implements OnInit {
         productos: this.productos
       }
     });
-    this.ngOnInit();
-    return await modal.present();
-    
+     
+    modal.onDidDismiss().then((data) =>{
+      this.ngOnInit();
+    })
+     await modal.present();
+     
   }
 }

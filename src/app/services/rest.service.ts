@@ -262,7 +262,7 @@ export class RestService {
     return new Promise(resolve => {
       this.http.delete(this.apiUrl + '/products/'+id,
       {
-        headers: new HttpHeaders().delete('Authorization', 'Bearer ' + this.token)
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
       .subscribe(data =>{
         resolve(data)

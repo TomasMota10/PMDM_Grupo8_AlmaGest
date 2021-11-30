@@ -11,10 +11,14 @@ export class ModalInfo2Page implements OnInit {
   @Input() productos: []
   prod: any[]=[]
   articulo: any[]=[]
+
   constructor(private restservice: RestService, private modalctrl: ModalController, private alertctrl: AlertController) { }
 
   ngOnInit() {
-    this.restservice.obtenerArticulos().then(data => {this.prod=data['data']})
+    this.restservice.obtenerArticulos()
+    .then(data => {
+      this.prod=data['data']
+    })
   }
 
   async addproductos(articulo: any){
@@ -33,8 +37,8 @@ export class ModalInfo2Page implements OnInit {
       text: 'Aceptar',
       handler: (data)=>{
         this.restservice.insertarProductos(articulo.id, data.precio, articulo.family_id) 
-        this.modalctrl.dismiss()
-        console.log(articulo)}
+        this.modalctrl.dismiss(this.productos)
+        }
     }]
     });
     await alert.present();
