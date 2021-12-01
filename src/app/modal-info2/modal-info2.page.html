@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="cancelar()">
@@ -7,19 +7,22 @@
     </ion-buttons>
     <ion-title>Lista de Articulos</ion-title>
   </ion-toolbar>
+  <ion-searchbar #search (ionChange)="buscar($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
-<ion-item-sliding *ngFor="let item of prod">
-  <ion-item>
-    <ion-label>
-      <p>{{item.description}}</p>
-    </ion-label>
-  </ion-item>
-  <ion-item-options>
-  <ion-item-option color="success" (click)="addproductos(item)">
-    <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-  </ion-item-option>
-  </ion-item-options>
-</ion-item-sliding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of articulos ">
+      <ion-item>
+        <ion-label>
+          <p>{{item.description}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="success" (click)="addproductos(item)">
+          <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

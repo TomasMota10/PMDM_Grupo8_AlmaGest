@@ -11,7 +11,8 @@ import { RestService } from '../services/rest.service';
 export class UserPage implements OnInit {
 
   productos: any[] =[];
-  limite=50;
+  limite=10;
+  desabilitado=false;
 
   @ViewChild('lista',{static:true}) lista: IonList;
   
@@ -21,13 +22,20 @@ export class UserPage implements OnInit {
     this.restService.obtenerProductosEmpresa()
     .then(data => {
       this.productos = data['data'];
+      if(this.productos.length==this.limite)
+        this.desabilitado=true
+      else
+        this.desabilitado=false
     })
   }
 
   borrarProduct(i: number, id: number){
     this.productos.splice(i, 1);
     this.restService.eliminarProducto(id);
-    
+    if(this.productos.length==this.limite)
+      this.desabilitado=true
+    else
+      this.desabilitado=false
   }
 
   async addProduct() {

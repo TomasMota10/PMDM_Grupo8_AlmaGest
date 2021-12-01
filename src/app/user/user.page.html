@@ -4,21 +4,24 @@
       <ion-menu-button menu="administration">
       </ion-menu-button>
     </ion-buttons>
-    <ion-title>Catalogo</ion-title>
+    <ion-title>Catálogo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list #lista>
     <ion-list-header>
-      <ion-label>
-        <h3>{{productos.length}} productos de {{limite}}</h3>
-      </ion-label>
+      <ion-title>
+        {{productos.length}} productos de {{limite}}
+      </ion-title>
     </ion-list-header>
     <ion-item-sliding *ngFor="let item of productos; index as i">
       <ion-item>
         <ion-label>
-          {{ item.compamy_description }} 
+          <p>{{ item.compamy_description }}</p>
+        </ion-label>
+        <ion-label slot="end">
+          <p>Precio: {{ item.price }} €</p>
         </ion-label>
       </ion-item>
       <ion-item-options slot="end">
@@ -29,7 +32,7 @@
     </ion-item-sliding>
   </ion-list>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button  (click)="addProduct()">
+      <ion-fab-button  [disabled]="desabilitado" (click)="addProduct()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
