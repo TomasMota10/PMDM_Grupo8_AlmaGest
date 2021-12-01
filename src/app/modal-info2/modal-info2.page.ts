@@ -14,6 +14,8 @@ export class ModalInfo2Page implements OnInit {
   @Input() productos: []
   prod: any[]=[]
   articulos: any[]=[]
+  idP: any[]=[];
+  idA: any[]=[];
 
   constructor(private toastctrl: ToastController, private restservice: RestService, private modalctrl: ModalController, private alertctrl: AlertController) { }
 
@@ -25,8 +27,29 @@ export class ModalInfo2Page implements OnInit {
     this.restservice.obtenerArticulos()
     .then(data => {
       this.prod=data['data']
-      this.articulos=this.prod
       
+      
+      this.productos.forEach(producto => {
+        if(!this.idP.includes(producto['article_id'])){
+          this.idP.push(producto['article_id'])
+        }
+      })
+
+      this.prod.forEach(articulo => {
+        if(!this.idA.includes(articulo['id'])){
+          this.idA.push(articulo['id']);
+        }
+      })
+
+      var result = this.idA.filter(id => !this.idP.includes(id));
+      
+      for(let i = 0; i < this.prod.length; i++) {
+        for(let j = 0; j < result.length; j++) {
+          if(this.prod[i]['id'] == result[j]){
+            this.articulos.push(this.prod[i])
+          }
+        }
+      }
     })
   }
 
@@ -46,8 +69,8 @@ export class ModalInfo2Page implements OnInit {
     {
       text: 'Aceptar',
       handler: (data)=>{
-        if(data.price < articulo.price_min || data.price > articulo.price_max){
-          this.toast(articulo.price_min, articulo.price_max)
+        if(data.precio < articulo.price_min || data.precio > articulo.price_max){
+          this.presentToast(articulo.price_min, articulo.price_max)
         }else{
           this.restservice.insertarProductos(articulo.id, data.precio, articulo.family_id) 
           this.modalctrl.dismiss(this.productos)
@@ -75,7 +98,7 @@ export class ModalInfo2Page implements OnInit {
     }
   }
 
-  async toast(price_min: any, price_max: any) {
+  async presentToast(price_min: any, price_max: any) {
     const toast = await this.toastctrl.create({
       message: 'Precio incorrecto. Debe estar entre ' + price_min + ' y ' + price_max + '€',
       duration: 1500
