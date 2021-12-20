@@ -10,6 +10,7 @@ export class RestService {
   token: any;
   company_id: number
   usuario: any;
+  company: string;
 
   apiUrl = 'http://semillero.allsites.es/public/api';
   
@@ -39,6 +40,7 @@ export class RestService {
         .subscribe(data => {
           this.token = data.data.token;
           this.company_id = data.data.company_id;
+          this.company = data.data.company;
           resolve(data);   
           console.log(data);   
           err=> {
@@ -268,6 +270,38 @@ export class RestService {
         resolve(data)
         console.log(data)
       err =>{
+        console.log(err)
+      }
+      })
+    })
+  }
+
+  obtenerArticulo(id: number){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/mostrarArt/'+id,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer'+ this.token)
+      })
+      .subscribe(data =>{
+        resolve(data)
+        console.log(data)
+      err =>{
+          console.log(err)
+        }
+      })
+    })
+  }
+
+  obtenerPedidos(){
+    return new Promise<any>(resolve => {
+      this.http.get(this.apiUrl + '/orders',
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+      })
+      .subscribe(data => {
+        resolve(data)
+        console.log(data)
+      err => {
         console.log(err)
       }
       })
