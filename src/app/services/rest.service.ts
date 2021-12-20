@@ -164,7 +164,7 @@ export class RestService {
 
   }
 
-  obtenerNoticias(){
+  obtenerCompanies(){
     return new Promise(resolve =>{
       this.http.get(this.apiUrl + '/companies'
       )

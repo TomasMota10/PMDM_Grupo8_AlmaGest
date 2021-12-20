@@ -16,11 +16,13 @@ export class ModalInfo2Page implements OnInit {
   articulos: any[]=[]
   idP: any[]=[];
   idA: any[]=[];
+  familias: any[]=[];
 
   constructor(private toastctrl: ToastController, private restservice: RestService, private modalctrl: ModalController, private alertctrl: AlertController) { }
 
   ngOnInit() {
    this.obtenerArticulos();
+   this.cargarFamilias();
   }
 
   obtenerArticulos(){
@@ -69,6 +71,7 @@ export class ModalInfo2Page implements OnInit {
     {
       text: 'Aceptar',
       handler: (data)=>{
+        data.precio=this.aplicarBenef(articulo,parseFloat(data.precio));
         if(data.precio < articulo.price_min || data.precio > articulo.price_max){
           this.presentToast(articulo.price_min, articulo.price_max)
         }else{
@@ -106,4 +109,16 @@ export class ModalInfo2Page implements OnInit {
     toast.present();
   }
 
+  cargarFamilias(){
+    this.restservice.obtenerFamilias().then(data => {
+      this.familias = data['data'];
+      console.log(this.familias);
+    })
+  }
+
+  aplicarBenef(articulo: any, precio: number){
+    var family = this.familias.find(f => f['id'] == articulo.family_id);
+    precio = precio + (precio * (parseInt(family['profit_margin']) / 100));
+    return precio;
+  }
 }
