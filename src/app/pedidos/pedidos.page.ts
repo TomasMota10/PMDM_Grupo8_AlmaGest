@@ -9,9 +9,7 @@ import { RestService } from '../services/rest.service';
 })
 export class PedidosPage implements OnInit {
 
-  @ViewChild(IonInfiniteScroll, {static: true}) infiniteScroll: IonInfiniteScroll;
-  
-  aux: any[] = [];
+ 
   pedidos: any[] = [];
 
   constructor(private restService: RestService) { }
@@ -20,26 +18,10 @@ export class PedidosPage implements OnInit {
 
     this.restService.obtenerPedidos()
     .then(data => {
-      this.aux.push(...data['data']);
+      this.pedidos.push(...data['data']);
 
-    // this.pedidos.forEach(data => {
-    //   if(data.target_company_name==this.restService.company){
-    //     this.pedidos.push(data);
-    // }
-    // })
   })
   }
 
-  loadData(event) {
-
-    setTimeout(() => {
-      if (this.pedidos.length > 2) {
-        event.target.complete();
-        this.infiniteScroll.disabled = true;
-        return;
-      }
-
-      event.target.complete();
-     }, 2000);
-   }
+  
 }

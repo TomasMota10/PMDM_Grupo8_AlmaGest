@@ -1,0 +1,9 @@
+<ion-list *ngFor="let pedido of pedidos; let i = index">
+  <app-tarjpedido [pedido]="pedido"></app-tarjpedido>
+</ion-list>
+<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Cargando mas pedidos...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
