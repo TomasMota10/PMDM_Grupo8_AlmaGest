@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll } from '@ionic/angular';
 import { RestService } from '../services/rest.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { RestService } from '../services/rest.service';
 })
 export class PedidosPage implements OnInit {
 
- 
+  aux: any[]=[];
   pedidos: any[] = [];
 
   constructor(private restService: RestService) { }
@@ -18,10 +17,13 @@ export class PedidosPage implements OnInit {
 
     this.restService.obtenerPedidos()
     .then(data => {
-      this.pedidos.push(...data['data']);
+      this.aux.push(...data['data']);
 
+      this.aux.forEach(data => {
+        if(data.target_company_name == this.restService.company){
+         this.pedidos.push(data);
+        }
   })
+  });
   }
-
-  
 }

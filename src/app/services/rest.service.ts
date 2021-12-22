@@ -40,7 +40,7 @@ export class RestService {
         .subscribe(data => {
           this.token = data.data.token;
           this.company_id = data.data.company_id;
-          this.company = data.data.company;
+         
           resolve(data);   
           console.log(data);   
           err=> {
@@ -183,6 +183,7 @@ export class RestService {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
       .subscribe(data => {resolve(data)
+        this.company = data['data']['company'];
         console.log(data);
       err => {
         console.log(err)

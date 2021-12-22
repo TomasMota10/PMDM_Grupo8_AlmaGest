@@ -50,6 +50,7 @@ export class LoginPage implements OnInit {
     .then(data => {
       this.data = data;
       this.data = this.data.data;
+      this.restService.obtenerUsuario(this.data.id);
       if(this.data.type=='a'){
         this.route.navigate(['/administration'])
       }else{
