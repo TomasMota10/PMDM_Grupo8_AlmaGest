@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-
+import { Product } from '../interfaces/interface';
 
 
 @Injectable({
@@ -220,11 +220,11 @@ export class RestService {
     })
   }
 
-  obtenerProductosEmpresa(){
+  obtenerProductosEmpresa(id?: number){
     return new Promise(resolve => {
       this.http.post(this.apiUrl + '/products/company',
       {
-        id: this.company_id
+        id: (id == null ? this.company_id : id)
       },
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
@@ -241,7 +241,7 @@ export class RestService {
 
   insertarProductos(articleid: number, myprice: number, myfamilyid: number){
     return new Promise(resolve => {
-      this.http.post(this.apiUrl +'/products',
+      this.http.post<Product>(this.apiUrl +'/products',
       {
         article_id: articleid,
         company_id: this.company_id,
@@ -304,6 +304,29 @@ export class RestService {
         console.log(data)
       err => {
         console.log(err)
+      }
+      })
+    })
+  }
+
+  insertarPedidos(num: string, issue_data: string, origincompanyid: number, targetcompanyid: number, prod: string) {
+    return new Promise<any>(resolve =>{
+      this.http.post(this.apiUrl + '/orders',
+      {
+        num: num,
+        issue_data: issue_data,
+        origin_company_id: origincompanyid,
+        target_company_id: targetcompanyid,
+        products: prod
+      },
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+      })
+      .subscribe(data => {
+        resolve(data);
+        console.log(data);
+      err => {
+        console.log(err);
       }
       })
     })

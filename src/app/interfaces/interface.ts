@@ -16,3 +16,16 @@ export interface Usuario{
     company: string;
     created_at: Date;
 }
+
+  export interface Product{
+    article_id: number;
+    company_id: number;
+    compamy_name: string;
+    compamy_description: string;
+    isChecked: boolean;
+    cant: number;
+    price: number;
+    stock: number;
+    family_id: number;
+    deleted: number;
+}

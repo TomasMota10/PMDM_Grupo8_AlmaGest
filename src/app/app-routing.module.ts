@@ -30,7 +30,8 @@ const routes: Routes = [
   {
     path: 'modal-info2',
     loadChildren: () => import('./modal-info2/modal-info2.module').then( m => m.ModalInfo2PageModule)
-  },  {
+  },
+  {
     path: 'pedidos',
     loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
   },

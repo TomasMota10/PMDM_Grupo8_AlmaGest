@@ -112,7 +112,7 @@ export class ModalInfo2Page implements OnInit {
   cargarFamilias(){
     this.restservice.obtenerFamilias().then(data => {
       this.familias = data['data'];
-      console.log(this.familias);
+      // console.log(this.familias);
     })
   }
 

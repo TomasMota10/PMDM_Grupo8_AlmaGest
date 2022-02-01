@@ -8,14 +8,20 @@ import { PedidosPageRoutingModule } from './pedidos-routing.module';
 
 import { PedidosPage } from './pedidos.page';
 import { ComponentsModule } from '../components/components.module';
+import { ModalInfo3Page } from '../modal-info3/modal-info3.page';
+import { ModalInfo3PageModule } from '../modal-info3/modal-info3.module'
 
 @NgModule({
+  entryComponents: [
+    ModalInfo3Page
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     PedidosPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    ModalInfo3PageModule
   ],
   declarations: [PedidosPage]
 })

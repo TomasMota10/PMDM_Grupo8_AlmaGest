@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelar()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item>
+  <ion-label>Empresa</ion-label>
+  <ion-select (ionChange)="obtenerProdCompany($event)">
+    <ion-select-option *ngFor="let company of companies" [value]=company.id>{{company.name}}</ion-select-option>
+  </ion-select>
+</ion-item>
+<ion-list>
+  <ion-row>
+      <ion-col size="12" size-lg="3" size-md="2" size-sm="6" size-xs="12" *ngFor="let prod of prodFil, let i = index"> 
+        <ion-item>
+          <ion-checkbox (ionChange)="habilitarCant($event)" slot="start"></ion-checkbox>
+          <h4>{{prod['compamy_description']}}</h4>
+          <ion-buttons *ngIf="prod['isChecked']==true">
+            <ion-button size="small" slot="end" (click)="sumarCant()"><ion-icon name="add"></ion-icon></ion-button>
+            <ion-label slot="end">{{prod['cant']}}</ion-label>
+            <ion-button size="small" slot="end" (click)="restCant()"><ion-icon name="deleted"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-col>  
+  </ion-row>
+<ion-infinite-scroll threshold="150px">
+<ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando...">
+</ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</ion-list>
+</ion-content>
