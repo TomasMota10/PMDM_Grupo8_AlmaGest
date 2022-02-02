@@ -332,4 +332,24 @@ export class RestService {
       })
     })
   }
+
+  obtenerDatosPedidoEmpresa(id: number){
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl+'/orders/company',
+      {
+        id: id
+      },
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+      })
+      .subscribe(data => {
+        resolve(data);
+        console.log(data);
+      err => {
+        console.log(err);
+      }
+      })
+    })
+  }
+  
 }
