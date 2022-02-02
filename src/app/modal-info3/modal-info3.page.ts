@@ -13,12 +13,14 @@ export class ModalInfo3Page implements OnInit {
   @Input() titulo: string
   companies: any[]=[];
   prodFil: Product[]=[];
-  producto: Product;
   productos: Product[]=[];
   misProductos: Product[]=[];
   target_company_id: number;
   idP: number[] = [];
   idMp: number[] = [];
+  cant: number;
+  
+ 
 
   constructor(private restservice: RestService, private modalctrl: ModalController) { }
 
@@ -45,7 +47,7 @@ export class ModalInfo3Page implements OnInit {
 
     this.restservice.obtenerProductosEmpresa(event.detail.value).then(data => {
       this.productos = data['data'];
-      console.log(this.productos);
+      // console.log(this.productos);
 
       this.productos.forEach(producto => {
         if(!this.idP.includes(producto['article_id'])){
@@ -55,9 +57,9 @@ export class ModalInfo3Page implements OnInit {
 
       var result = this.idP.filter(id => this.idMp.includes(id));
 
-      console.log(result);
+      // console.log(result);
 
-      // this.prodFil = [];
+      this.prodFil = [];
 
       for(let i = 0; i < this.productos.length; i++) {
         for(let j = 0; j < result.length; j++) {
@@ -66,7 +68,7 @@ export class ModalInfo3Page implements OnInit {
           }
         }}
 
-      console.log(this.prodFil);
+      // console.log(this.prodFil);
 
     })
 
@@ -87,27 +89,60 @@ export class ModalInfo3Page implements OnInit {
     })
   }
 
-  habilitarCant(event){
-    this.producto.isChecked = event.currentTarget.checked;
+  habilitar(event, producto){
+    producto.isChecked = event.currentTarget.checked;
 
-    if(this.producto.isChecked == true){
-      // this.cant = 1;
-      this.producto.cant = 1;
+    if(producto.isChecked == true){
+      this.cant = 1;
+      producto.cant = this.cant;
     }
 
-    console.log(this.producto.isChecked);
+    // console.log(this.producto.isChecked);
   }
 
-  sumarCant(){
-    // this.cant++;
-    this.producto.cant++;
-  }
-
-  restCant(){
-    if(this.producto.cant > 1){
-      // this.cant--;
-      this.producto.cant--;
+  sumar(producto){
+    if(this.cant < 40){
+       this.cant++;
+       producto.cant = this.cant;
     }
   }
 
+  restar(producto){
+    if(this.cant > 1){
+      this.cant--;
+      producto.cant = this.cant
+    }
+  }
+
+  realizarPedido(){
+    var prodAndCant = '';
+    
+    this.prodFil.forEach(producto => {
+      if(producto.isChecked){
+        prodAndCant += producto['article_id'] + ',' + producto.cant + ',';
+      }
+    })
+
+    var numPed = Math.round(Math.random() * 1000000);
+    var fechaActual = this.fechaActual();
+
+    this.restservice.insertarPedidos(numPed, fechaActual, this.restservice.company_id, this.target_company_id,prodAndCant);
+
+  }
+
+  fechaActual(){
+  
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if(month < 10){
+      return `${year}-0${month}-${day}`;
+    }else{
+      return `${year}-${month}-${day}`;
+    }
+
+  }
 }

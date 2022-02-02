@@ -20,19 +20,16 @@
   <ion-row>
       <ion-col size="12" size-lg="3" size-md="2" size-sm="6" size-xs="12" *ngFor="let prod of prodFil, let i = index"> 
         <ion-item>
-          <ion-checkbox (ionChange)="habilitarCant($event)" slot="start"></ion-checkbox>
-          <h4>{{prod['compamy_description']}}</h4>
-          <ion-buttons *ngIf="prod['isChecked']==true">
-            <ion-button size="small" slot="end" (click)="sumarCant()"><ion-icon name="add"></ion-icon></ion-button>
+          <ion-checkbox (ionChange)="habilitar($event,prod)" slot="start"></ion-checkbox>
+          <h5>{{prod['compamy_description']}}</h5>
+          <ion-buttons *ngIf="prod['isChecked']==true" slot="end">
+            <ion-button color="primary" size="small" slot="end" (click)="sumar(prod)"><ion-icon name="add"></ion-icon></ion-button>
             <ion-label slot="end">{{prod['cant']}}</ion-label>
-            <ion-button size="small" slot="end" (click)="restCant()"><ion-icon name="deleted"></ion-icon></ion-button>
+            <ion-button color="danger" size="small" slot="end" (click)="restar(prod)"><ion-icon name="remove"></ion-icon></ion-button>
           </ion-buttons>
         </ion-item>
       </ion-col>  
   </ion-row>
-<ion-infinite-scroll threshold="150px">
-<ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando...">
-</ion-infinite-scroll-content>
-</ion-infinite-scroll>
 </ion-list>
+<ion-button color="primary" (click)="realizarPedido()">Realizar Pedido</ion-button>
 </ion-content>

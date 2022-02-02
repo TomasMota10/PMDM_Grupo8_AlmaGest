@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { ModalController } from '@ionic/angular';
 import { ModalInfo3Page } from '../modal-info3/modal-info3.page'
+import { Product } from '../interfaces/interface';
 
 @Component({
   selector: 'app-pedidos',
@@ -12,6 +13,7 @@ export class PedidosPage implements OnInit {
 
   aux: any[]=[];
   pedidos: any[] = [];
+  producto: Product;
 
   constructor(private restService: RestService, private modalCtrl: ModalController) { }
 
@@ -33,7 +35,8 @@ export class PedidosPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ModalInfo3Page,
       componentProps: {
-        titulo: 'Iniciar Pedido'
+        titulo: 'Iniciar Pedido',
+        
       }
     });
     await modal.present();

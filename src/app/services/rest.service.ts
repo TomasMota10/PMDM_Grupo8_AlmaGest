@@ -11,7 +11,8 @@ export class RestService {
   company_id: number
   usuario: any;
   company: string;
-
+  producto: Product[]=[];
+  
   apiUrl = 'http://semillero.allsites.es/public/api';
   
   constructor(private http: HttpClient) { }
@@ -309,7 +310,7 @@ export class RestService {
     })
   }
 
-  insertarPedidos(num: string, issue_data: string, origincompanyid: number, targetcompanyid: number, prod: string) {
+  insertarPedidos(num: number, issue_data: string, origincompanyid: number, targetcompanyid: number, prod: string) {
     return new Promise<any>(resolve =>{
       this.http.post(this.apiUrl + '/orders',
       {

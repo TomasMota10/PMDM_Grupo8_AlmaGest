@@ -29,3 +29,4 @@ export interface Usuario{
     family_id: number;
     deleted: number;
 }
+
