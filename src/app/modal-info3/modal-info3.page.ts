@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { ModalController } from '@ionic/angular';
 import { Product } from '../interfaces/interface'
+import { ModalInfo4Page } from '../modal-info4/modal-info4.page';
 
 @Component({
   selector: 'app-modal-info3',
@@ -19,7 +20,7 @@ export class ModalInfo3Page implements OnInit {
   idP: number[] = [];
   idMp: number[] = [];
   cant: number;
-  
+  pedido:any;
  
 
   constructor(private restservice: RestService, private modalctrl: ModalController) { }
@@ -114,22 +115,6 @@ export class ModalInfo3Page implements OnInit {
     }
   }
 
-  realizarPedido(){
-    var prodAndCant = '';
-    
-    this.prodFil.forEach(producto => {
-      if(producto.isChecked){
-        prodAndCant += producto['article_id'] + ',' + producto.cant + ',';
-      }
-    })
-
-    var numPed = Math.round(Math.random() * 1000000);
-    var fechaActual = this.fechaActual();
-
-    this.restservice.insertarPedidos(numPed, fechaActual, this.restservice.company_id, this.target_company_id,prodAndCant);
-
-  }
-
   fechaActual(){
   
     let date = new Date();
@@ -139,10 +124,42 @@ export class ModalInfo3Page implements OnInit {
     let year = date.getFullYear();
 
     if(month < 10){
-      return `${year}-0${month}-${day}`;
+      var fecha=`${year}-0${month}-${day}`;
+      return fecha;
     }else{
-      return `${year}-${month}-${day}`;
+      var fecha=`${year}-${month}-${day}`;
+      return fecha;
     }
 
   }
+  async realizarPedido(){
+    var prodAndCant = '';
+    
+    this.prodFil.forEach(producto => {
+      if(producto.isChecked){
+        prodAndCant += producto['article_id'] + ',' + producto.cant + ',';
+      }
+    })
+
+    var numPed = Math.round(Math.random() * 1000000);
+    var fechaActual =this.fechaActual();
+    
+    this.pedido = {
+        num: numPed,
+        issue_data: fechaActual,
+        origin_company_id: this.restservice.company_id,
+        target_company_id: this.target_company_id
+    }
+
+    this.restservice.insertarPedidos(this.pedido, prodAndCant);
+    
+    const modal = await this.modalctrl.create({
+      component: ModalInfo4Page
+    });
+    await modal.present();
+  
+
+  }
+
+ 
 }

@@ -8,14 +8,16 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
-import { File } from '@ionic-native/file';
-import { FileOpener } from '@ionic-native/file-opener';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ComponentsModule, ],
   providers: [
+    File,
+    FileOpener,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
   ],
   bootstrap: [AppComponent],

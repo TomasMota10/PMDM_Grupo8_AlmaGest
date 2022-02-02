@@ -310,15 +310,15 @@ export class RestService {
     })
   }
 
-  insertarPedidos(num: number, issue_data: string, origincompanyid: number, targetcompanyid: number, prod: string) {
+  insertarPedidos(pedido: any, prod: string) {
     return new Promise<any>(resolve =>{
       this.http.post(this.apiUrl + '/orders',
       {
-        num: num,
-        issue_data: issue_data,
-        origin_company_id: origincompanyid,
-        target_company_id: targetcompanyid,
-        products: prod
+        num: pedido['num'],
+        issue_date: pedido['issue_date'],
+        origin_company_id: pedido['origin_company_id'],
+        target_company_id: pedido['target_company_id'],
+        products: prod,
       },
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)

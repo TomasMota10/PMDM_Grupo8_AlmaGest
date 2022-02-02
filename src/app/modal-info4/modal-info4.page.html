@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title-ios ion-text-capitalize">Vista Previa</ion-title>
+    <ion-buttons (click)="closeModal()" >
+      <ion-button slot="icon" slot="start">
+        <ion-icon class="icon" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" color="danger" fill="outline" (click)="createPDF()">
+        View PDF
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div id="PrintInvoice" class="invoice-box">
+    <table style="max-width: 800px;margin: auto;padding: 30px;border: 1px solid;" cellpadding="2" cellspacing="2">
+    <tbody>
+    <tr>
+    <td style="vertical-align: top;">LOGO<br>
+    EMPRESA<br>
+    </td>
+    <td style="vertical-align: top;">Nombre empresa:<br>
+    Direccion empresa:<br>
+    Provincia empresa:<br>
+    CIF empresa:<br>
+    </td>
+    <td colspan="3" rowspan="2" style="vertical-align: top;"><br>
+    PEDIDO Nº .......................<br>
+    <br>
+    <br>
+    FECHA __________________<br>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="2" rowspan="1" style="vertical-align: top;">email
+    empresa<br>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="2" rowspan="1" style="vertical-align: top;">Direccion
+    de envio:<br>
+    Fecha de entrega:<br>
+    Trasporte:&nbsp; A nuestro cargo<br>
+    Forma de pago:<br>
+    Condiciones de entrega:<br>
+    </td>
+    <td colspan="3" rowspan="1" style="vertical-align: top;"><br>
+    </td>
+    </tr>
+    <tr>
+    <td style="vertical-align: top;">Ref.Cod<br>
+    </td>
+    <td style="vertical-align: top;">Descripcion<br>
+    </td>
+    <td style="vertical-align: top;">Cantidad<br>
+    </td>
+    <td style="vertical-align: top;">Precio<br>
+    </td>
+    <td style="vertical-align: top;">Importe</td>
+    </tr>
+    <tr>
+    <td style="vertical-align: top;"><br>
+    </td>
+    <td style="vertical-align: top;"><br>
+    </td>
+    <td style="vertical-align: top;"><br>
+    </td>
+    <td style="vertical-align: top;"><br>
+    </td>
+    <td style="vertical-align: top;"><br>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="4" rowspan="1" style="vertical-align: top;">TOTAL<br>
+    </td>
+    <td style="vertical-align: top;">-€<br>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="5" rowspan="1" style="vertical-align: top;">Aceptado
+    por<br>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+</ion-content>
+
