@@ -34,7 +34,11 @@ const routes: Routes = [
   {
     path: 'pedidos',
     loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
+  },  {
+    path: 'grafica',
+    loadChildren: () => import('./grafica/grafica.module').then( m => m.GraficaPageModule)
   },
+
   
 
 

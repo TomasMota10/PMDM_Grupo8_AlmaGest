@@ -12,6 +12,7 @@ export class RestService {
   usuario: any;
   company: string;
   producto: Product[]=[];
+  prodE: any;
   
   apiUrl = 'http://semillero.allsites.es/public/api';
   
@@ -233,6 +234,10 @@ export class RestService {
       .subscribe(data =>{
         resolve(data)
         console.log(data);
+        if(id == null){
+          this.prodE = data['data'];
+          console.log(this.prodE);
+        }
       err =>{
         console.log(err);
       }
@@ -333,11 +338,11 @@ export class RestService {
     })
   }
 
-  obtenerDatosPedidoEmpresa(id: number){
+  obtenerDatosPedidoEmpresa(){
     return new Promise(resolve => {
-      this.http.post(this.apiUrl+'/orders/company',
+      this.http.post<any>(this.apiUrl+'/orders/company',
       {
-        id: id
+        id: this.company_id
       },
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
