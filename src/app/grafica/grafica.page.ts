@@ -69,22 +69,22 @@ export class GraficaPage implements OnInit {
     this.numPedido[mes] = 0;
 
     var inicioM = new Date(new Date().getFullYear(), new Date().getMonth() - mes ,1);
-    var finM = new Date(new Date().getFullYear(), new Date().getMonth() - mes + 1, 0);
+    var finM = new Date(new Date().getFullYear(), new Date().getMonth() - mes + 1, 0,23,59,59);
 
     this.pedidos.filter(pedido => {
-        pedido.order_lines.filter(order_line => {
-          if(new Date(order_line.issue_date) > inicioM && new Date(order_line.issue_date) < finM){
-            order_line.articles_line.forEach(article => {
-              if(article.article_id == id){
-                console.log(article);
-                this.numPedido[mes] += article.num_articles;
+        pedido.order_lines.filter(pedido => {
+          if(new Date(pedido.issue_date) > inicioM && new Date(pedido.issue_date) < finM){
+            pedido.articles_line.forEach(articulo => {
+              if(articulo.article_id == id){
+                console.log(articulo);
+                this.numPedido[mes] += articulo.num_articles;
               }
             })
           }
         })
     })
     
-    // console.log(this.vecesComprado);
+    
 
   }
 
