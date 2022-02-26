@@ -5,10 +5,10 @@
       <ion-button slot="icon" slot="start">
         <ion-icon class="icon" name="arrow-back-outline"></ion-icon>
       </ion-button>
-      <ion-button slot="end" color="danger" fill="outline" (click)="createPDF()">
-        Ver PDF
-      </ion-button>
     </ion-buttons>
+    <ion-button slot="end" color="danger" fill="outline" (click)="createPDF()">
+      Ver PDF
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -84,5 +84,6 @@
     </tbody>
     </table>
   </div>
+  <ion-button color="primary" (click)="enviarEmail()">Enviar PDF</ion-button>
 </ion-content>
 

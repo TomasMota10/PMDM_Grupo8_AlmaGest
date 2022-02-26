@@ -76,7 +76,7 @@ export class GraficaPage implements OnInit {
           if(new Date(pedido.issue_date) > inicioM && new Date(pedido.issue_date) < finM){
             pedido.articles_line.forEach(articulo => {
               if(articulo.article_id == id){
-                console.log(articulo);
+                // console.log(articulo);
                 this.numPedido[mes] += articulo.num_articles;
               }
             })

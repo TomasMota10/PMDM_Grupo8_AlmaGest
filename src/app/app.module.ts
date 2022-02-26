@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
   providers: [
     File,
     FileOpener,
+    EmailComposer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
   ],
   bootstrap: [AppComponent],

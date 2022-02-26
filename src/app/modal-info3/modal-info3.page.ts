@@ -19,7 +19,7 @@ export class ModalInfo3Page implements OnInit {
   target_company_id: number;
   idP: number[] = [];
   idMp: number[] = [];
-  cant: number;
+  // cant: number;
   pedido:any;
  
 
@@ -94,24 +94,24 @@ export class ModalInfo3Page implements OnInit {
     producto.isChecked = event.currentTarget.checked;
 
     if(producto.isChecked == true){
-      this.cant = 1;
-      producto.cant = this.cant;
+      // this.cant = 1;
+      producto.cant = 1;
     }
 
     // console.log(this.producto.isChecked);
   }
 
   sumar(producto){
-    if(this.cant < 40){
-       this.cant++;
-       producto.cant = this.cant;
+    if(producto.cant < 40){
+      //  this.cant++;
+       producto.cant++;
     }
   }
 
   restar(producto){
-    if(this.cant > 1){
-      this.cant--;
-      producto.cant = this.cant
+    if(producto.cant > 1){
+      // this.cant--;
+      producto.cant--;
     }
   }
 
@@ -124,10 +124,10 @@ export class ModalInfo3Page implements OnInit {
     let year = date.getFullYear();
 
     if(month < 10){
-      var fecha=`${year}-0${month}-${day}`;
+      var fecha = `${year}-0${month}-${day}`;
       return fecha;
     }else{
-      var fecha=`${year}-${month}-${day}`;
+      var fecha = `${year}-${month}-${day}`;
       return fecha;
     }
 
@@ -138,27 +138,30 @@ export class ModalInfo3Page implements OnInit {
     this.prodFil.forEach(producto => {
       if(producto.isChecked){
         prodAndCant += producto['article_id'] + ',' + producto.cant + ',';
+        
       }
     })
-
+    prodAndCant=prodAndCant.substring(0, prodAndCant.length-1)
+   
     var numPed = Math.round(Math.random() * 1000000);
     var fechaActual =this.fechaActual();
     
     this.pedido = {
         num: numPed,
-        issue_data: fechaActual,
+        issue_date: fechaActual,
         origin_company_id: this.restservice.company_id,
         target_company_id: this.target_company_id
     }
 
     this.restservice.insertarPedidos(this.pedido, prodAndCant);
     
+
     const modal = await this.modalctrl.create({
       component: ModalInfo4Page
     });
     await modal.present();
-  
-
+   
+    
   }
 
  

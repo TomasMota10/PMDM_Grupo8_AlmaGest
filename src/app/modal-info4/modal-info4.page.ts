@@ -3,8 +3,8 @@ import { ModalController } from '@ionic/angular';
 
 import JSPDF from 'jspdf';
 import domtoimage from 'dom-to-image'
-import {FileOpener} from '@ionic-native/file-opener/ngx'
-import {File, IWriteOptions} from '@ionic-native/file/ngx'
+import { FileOpener } from '@ionic-native/file-opener/ngx'
+import { File, IWriteOptions } from '@ionic-native/file/ngx'
 import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
 
 @Component({
@@ -34,8 +34,8 @@ export class ModalInfo4Page implements OnInit {
     };
 
     domtoimage.toPng(pdfBlock, options).then((fileUrl) => {
-      var doc = new JSPDF("p","mm","a4");
-      doc.addImage(fileUrl, 'PNG', 10, 10, 240, 180);
+      var doc = new JSPDF("p","px","a4");
+      doc.addImage(fileUrl, 'PDF', 10, 10, 0, 0);
   
       let docRes = doc.output();
       let buffer = new ArrayBuffer(docRes.length);
@@ -76,7 +76,7 @@ export class ModalInfo4Page implements OnInit {
     }).catch(function (error) {
       console.error(error);
     });
-    this.enviarEmail();
+    
   }
 
   enviarEmail()

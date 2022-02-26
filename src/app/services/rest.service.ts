@@ -58,7 +58,8 @@ export class RestService {
       this.http.get(this.apiUrl + '/users',{
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
-      .subscribe(data => {resolve(data)
+      .subscribe(data => {
+        resolve(data)
         console.log(data);
       err => {
         console.log(err);
@@ -93,7 +94,8 @@ export class RestService {
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
-      .subscribe(data => {resolve(data)
+      .subscribe(data => {
+        resolve(data)
         console.log(data);
       err => {
         console.log(err);
@@ -112,7 +114,8 @@ export class RestService {
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
-      .subscribe(data => {resolve(data)
+      .subscribe(data => {
+        resolve(data)
         console.log(data);
       err => {
         console.log(err);
@@ -137,7 +140,8 @@ export class RestService {
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
-      .subscribe(data => {resolve(data)
+      .subscribe(data => {
+        resolve(data)
         console.log(data);
       err => {
         console.log(err);
@@ -156,7 +160,8 @@ export class RestService {
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
-      .subscribe(data => {resolve(data)
+      .subscribe(data => {
+        resolve(data)
         console.log(data);
       err => {
         console.log(err);
@@ -170,7 +175,8 @@ export class RestService {
     return new Promise(resolve =>{
       this.http.get(this.apiUrl + '/companies'
       )
-      .subscribe(data => {resolve(data)
+      .subscribe(data => {
+        resolve(data)
         console.log(data)
       err =>{
         console.log(err)
@@ -184,7 +190,8 @@ export class RestService {
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
       })
-      .subscribe(data => {resolve(data)
+      .subscribe(data => {
+        resolve(data)
         this.company = data['data']['company'];
         console.log(data);
       err => {
